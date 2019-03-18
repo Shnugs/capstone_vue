@@ -1,17 +1,15 @@
 <template>
-  <div class="home">
-    <h5>{{ message }}</h5>
+  <div class="new">
+    
   </div>
 </template>
 
-<style>
-</style>
-
 <script>
+var axios = require('axios')
+
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!"
     };
   },
   created: function() {},
