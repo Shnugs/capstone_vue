@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
             <h2>Characters</h2>
-            <h3>Select your combatant</h3>
+            <h3>Select your combatant:</h3>
           </div>
         </div>
         <div v-for="character in characters">
@@ -40,7 +40,7 @@ export default {
     };
   },
   created: function() {
-    axios.get('/api/characters')
+    axios.get('/api/characters/user_characters')
     .then(response => {
       this.characters = response.data;
     });

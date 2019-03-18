@@ -8,7 +8,10 @@
             <ul>
               <li><router-link to="characters">Home</router-link></li>
               <li><router-link to="new">New Character</router-link></li>
-              <li><router-link to="#">Account</router-link></li>
+              <!-- TODO - Make the 'Account' button a drop-down containing login/logout/signup buttons -->
+              <li><router-link to="login">Login</router-link></li>
+              <li><a href="logout">Logout</a></li>
+              <li><router-link to="/signup">Signup</router-link></li>
               <!-- <li><router-link to="Characters">Characters</router-link></li> -->
               <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
               <!-- <li><a href="services.html">Services</a></li> -->
