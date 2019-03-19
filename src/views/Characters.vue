@@ -16,13 +16,14 @@
               <router-link :to="'/profile/' + character['id']"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
               <div class="desc">
                 <h3><router-link :to="'/profile/' + character['id']">{{ character["name"] }}</router-link></h3>
-                <p><a href="#" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-right"></i></a></p>
+                <p><router-link :to="'/new_sim/' + character['id']" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-up"></i></router-link></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-4 text-center">
           <div class="blog-inner">
+            <!-- TODO - Center this image -->
             <a href="new"><img class="img-responsive" src="images/add_icon.png" alt="Blog"></a>
             <div class="desc">
               <h3><a href="new">Add New</a></h3>
