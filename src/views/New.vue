@@ -67,8 +67,8 @@
           <input class='form-control' type='text' v-model="character.strength_mod" placeholder="+5">
         </div>
         <div class="form-group">
-          <label>Dextarity Mod</label>
-          <input class='form-control' type='text' v-model="character.dextarity_mod" placeholder="+5">
+          <label>Dexterity Mod</label>
+          <input class='form-control' type='text' v-model="character.dexterity_mod" placeholder="+5">
         </div>
         <div class="form-group">
           <label>Constitution Mod</label>
@@ -161,7 +161,7 @@ export default {
               wisdom: "",
               intelligence: "",
               strength_mod: "",
-              dextarity_mod: "",
+              dexterity_mod: "",
               constitution_mod: "",
               charisma_mod: "",
               wisdom_mod: "",
@@ -200,7 +200,7 @@ export default {
                     wisdom: this.character['wisdom'],
                     intelligence: this.character['intelligence'],
                     strength_mod: this.character['strength_mod'],
-                    dextarity_mod: this.character['dextarity_mod'],
+                    dexterity_mod: this.character['dexterity_mod'],
                     constitution_mod: this.character['constitution_mod'],
                     charisma_mod: this.character['charisma_mod'],
                     wisdom_mod: this.character['wisdom_mod'],

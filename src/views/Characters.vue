@@ -12,9 +12,9 @@
         <div v-for="character in characters">
           <div class="col-md-4 text-center">
             <div class="blog-inner">
-              <a href="#"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></a>
+              <router-link to="profile"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
               <div class="desc">
-                <h3><a href="#">{{ character["name"] }}</a></h3>
+                <h3><router-link :to="'profile/' + character['id']">{{ character["name"] }}</router-link></h3>
                 <p><a href="#" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-right"></i></a></p>
               </div>
             </div>

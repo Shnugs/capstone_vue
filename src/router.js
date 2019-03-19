@@ -5,6 +5,7 @@ import New from './views/New.vue';
 import Login from './views/Login.vue';
 import Logout from "./views/Logout.vue";
 import Signup from "./views/Signup.vue";
+import Profile from "./views/Profile.vue";
 
 Vue.use(Router)
 
@@ -16,6 +17,7 @@ export default new Router({
     { path: '/new', name: 'new', component: New },
     { path: '/login', name: 'login', component: Login },
     { path: '/logout', name: 'logout', component: Logout },
-    { path: "/signup", name: "signup", component: Signup }
+    { path: "/signup", name: "signup", component: Signup },
+    { path: "/profile/:id", name: "profile", component: Profile }
   ]
 })
