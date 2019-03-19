@@ -1,10 +1,10 @@
 <template>
-  <div class="edit">
+  <div class="new">
     <ul>
       <li v-for="error in errors"{{ error }}</li>
     </ul>
     <div class='container'>
-      <h2>Edit Character</h2>
+      <h2>New Character</h2>
       <form v-on:submit.prevent="submit()">
         <div class="form-group">
           <label>Name</label>
@@ -27,7 +27,7 @@
           <input class='form-control' type='text' v-model="character.deity" placeholder="Lolth, Gruumsh, Kord, etc...">
         </div>
         <div class="form-group">
-          <label>hp</label>
+          <label>HP</label>
           <input class='form-control' type='text' v-model="character.max_hp" placeholder="56">
         </div>
         <div class="form-group">
@@ -122,7 +122,7 @@
           <label>Alignment</label>
           <input class='form-control' type='text' v-model="character.alignment" placeholder="LG, LN, LE, NG, TN, NE, CG, CN, CE">
         </div>
-        <input type="submit" value="Update" class="btn btn-primary">
+        <input type="submit" value="Create" class="btn btn-primary">
       </form>
     </div>
   </div>
@@ -179,6 +179,10 @@ export default {
     };
   },
   created: function() {
+    axios.get("/api/characters/" + this.$route.params.id)
+      .then(response => {
+        this.character = response.data;
+      })
   },
   methods: {
     submit: function() {
@@ -214,9 +218,9 @@ export default {
                     background: this.character['background'],
                     alignment: this.character['alignment']
                     };
-      axios.post("/api/characters", params)
+      axios.patch("/api/characters/" + this.character.id, params)
         .then(response => {
-          this.$router.push("/characters");
+          this.$router.push("/profile/" + this.character.id);
         }).catch(error => {
           this.errors = error.response.data.errors;
         });

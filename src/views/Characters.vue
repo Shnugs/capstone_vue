@@ -1,4 +1,5 @@
 <template>
+<!-- TODO - Set all the cards to a standard size so that they stack evenly -->
 <div class="characters">
   <div id="fh5co-page">
     <div id="fh5co-blog-section">
@@ -12,9 +13,9 @@
         <div v-for="character in characters">
           <div class="col-md-4 text-center">
             <div class="blog-inner">
-              <router-link to="profile"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
+              <router-link :to="'/profile/' + character['id']"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
               <div class="desc">
-                <h3><router-link :to="'profile/' + character['id']">{{ character["name"] }}</router-link></h3>
+                <h3><router-link :to="'/profile/' + character['id']">{{ character["name"] }}</router-link></h3>
                 <p><a href="#" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-right"></i></a></p>
               </div>
             </div>

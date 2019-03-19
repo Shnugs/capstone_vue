@@ -3,22 +3,22 @@
     <header id="fh5co-header" role="banner">
       <div class="container">
         <div class="header-inner">
-          <h1><i class="sl-icon-energy"></i><a href="index.html">MVG: Arena</a></h1>
+          <h1><i class="sl-icon-energy"></i><a href="/characters">MVG: Arena</a></h1>
           <nav role="navigation">
             <ul>
-              <li><router-link to="characters">Home</router-link></li>
-              <li><router-link to="new">New Character</router-link></li>
+              <li><router-link to="/characters">Home</router-link></li>
+              <li><router-link to="/new">New Character</router-link></li>
 
               <li class="nav-item dropdown">
                 <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <router-link class="dropdown-item" to="login">Login</router-link>
+                  <router-link class="dropdown-item" to="/login">Login</router-link>
                   <div class="dropdown-divider"></div>
                   <router-link class="dropdown-item" to="/signup">Sign up</router-link>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="logout">Logout</a>
+                  <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
               </li>
             </ul>
@@ -29,6 +29,7 @@
 
     <router-view/>
 
+    <!-- TODO - Bruh, fix this here footer up -->
     <footer id="fh5co-footer" role="contentinfo">
       <div class="container">
         <div class="col-md-3 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">

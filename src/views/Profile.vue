@@ -1,5 +1,6 @@
 
 <template>
+  <!-- TODO - Clean up the formatting on this so it's not such an eyesore -->
   <div class="profile">
     <div id="fh5co-page">
       <div id="fh5co-about-section">
@@ -17,16 +18,17 @@
                   <div class="about-inner">
                     <img class="img-responsive" src="images/image_about.jpg" alt="About">
                     <h3>Fluff:</h3>
-                    <p>Far far away.</p>
                     <p>Owner: {{ character["player"] }}</p>
-                    <p>Class {{ character["character_class"] }}</p>
-                    <p>Race {{ character["race"] }}</p>
-                    <p>Deity {{ character["deity"] }}</p>
-                    <p>Level {{ character["level"] }}</p>
+                    <p>Class: {{ character["character_class"] }}</p>
+                    <p>Race: {{ character["race"] }}</p>
+                    <p>Deity: {{ character["deity"] }}</p>
+                    <p>Level: {{ character["level"] }}</p>
                     <p>Feats:</p>
                     <p> {{ character["feats"] }}</p>
                     <p>Flaws:</p>
                     <p> {{ character["flaws"] }}</p>
+                    <h3>Simulation Data:</h3>
+                    <!-- TODO - Add charts below here -->
                   </div>
                 </div>
               </div>
@@ -44,7 +46,7 @@
                       <li>Wis: {{ character['wisdom'] }} (mod: {{ character['wisdom_mod'] }})</li>
                       <li>Int: {{ character['intelligence'] }} (mod: {{ character['intelligence_mod'] }})</li>
                       <li>Cha: {{ character['charisma'] }} (mod: {{ character['charisma_mod'] }})</li>
-                      <li>HP: {{ character['hp'] }}</li>
+                      <li>HP: {{ character['max_hp'] }}</li>
                       <li>AC: {{ character['armor_class'] }}</li>
                       <li>Initiative Bonus: {{ character['initiative'] }}</li>
                       <li>Speed: {{ character['speed'] }}</li>
@@ -56,7 +58,7 @@
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                   </div>
                 </div>
-                <p><a href="#" class="btn btn-primary btn-outline with-arrow">Edit Character<i class="icon-arrow-right"></i></a></p>
+                <p><router-link :to="'/edit/' + character['id']" class="btn btn-primary btn-outline with-arrow">Edit Character<i class="icon-arrow-up"></i></router-link></p>
               </aside>
             </div>
           </div>
