@@ -15,8 +15,16 @@
               <a href="#"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></a>
               <div class="desc">
                 <h3><a href="#">{{ character["name"] }}</a></h3>
-                <p><a href="#" class="btn btn-primary btn-outline with-arrow">Read More<i class="icon-arrow-right"></i></a></p>
+                <p><a href="#" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-right"></i></a></p>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="blog-inner">
+            <a href="new"><img class="img-responsive" src="images/add_icon.png" alt="Blog"></a>
+            <div class="desc">
+              <h3><a href="new">Add New</a></h3>
             </div>
           </div>
         </div>

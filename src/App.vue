@@ -8,14 +8,19 @@
             <ul>
               <li><router-link to="characters">Home</router-link></li>
               <li><router-link to="new">New Character</router-link></li>
-              <!-- TODO - Make the 'Account' button a drop-down containing login/logout/signup buttons -->
-              <li><router-link to="login">Login</router-link></li>
-              <li><a href="logout">Logout</a></li>
-              <li><router-link to="/signup">Signup</router-link></li>
-              <!-- <li><router-link to="Characters">Characters</router-link></li> -->
-              <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
-              <!-- <li><a href="services.html">Services</a></li> -->
-              <!-- <li><a href="about.html">About</a></li> -->
+
+              <li class="nav-item dropdown">
+                <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <router-link class="dropdown-item" to="login">Login</router-link>
+                  <div class="dropdown-divider"></div>
+                  <router-link class="dropdown-item" to="/signup">Sign up</router-link>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="logout">Logout</a>
+                </div>
+              </li>
             </ul>
           </nav>
         </div>
