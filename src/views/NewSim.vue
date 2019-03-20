@@ -12,20 +12,23 @@
         <div class="row">
           <div class="col-md-3">
             <h2>Your Fighter:</h2>
-            <ul class="contact-info">
-              <li><h3><router-link :to="'/profile/' + hero.id">{{ hero["name"] }}</router-link></h3></li>
-            </ul>
+            <h3><router-link :to="'/profile/' + hero.id">{{ hero["name"] }}</router-link></h3>
           </div>
-          
-          <div class="col-md-8 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <input class="form-control" placeholder="Enemy" type="text">
+          <div>
+          </div>
+            <div class="col-md-8 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    Enemy: <input v-on:keyup="runFilter()" v-model="nameFilter" list="names">
+                    <datalist id="names">
+                      <option v-for="villain in villains">{{ villain.name }}</option>
+                    </datalist>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div>        
         </div>
       </div>
     </div>
@@ -35,14 +38,16 @@
 
 <script>
   var axios = require('axios')
+  import Vue2Filters from "vue2-filters";
 
   export default {
     data: function() {
       return {
         hero: {},
         iterations: "",
-        villains: []
-      }
+        villains: [],
+        nameFilter: ""
+      };
     },
     created: function() {
       axios.get("api/characters/" + this.$route.params['id'])
@@ -50,7 +55,14 @@
           this.hero = response.data
         });
     },
-    methods: {}, 
+    methods: {
+      runFilter: function(){
+        axios.get("api/characters/filter?filters=" + this.nameFilter)
+          .then(response => {
+            this.villains = response.data
+          });
+      }
+    }, 
     mixins: [Vue2Filters.mixin]
   };
 </script>
