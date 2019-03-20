@@ -54,6 +54,7 @@
         .then(response => {
           this.hero = response.data
         });
+      
     },
     methods: {
       runFilter: function(){
