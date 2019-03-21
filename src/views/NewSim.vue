@@ -63,7 +63,6 @@
             this.villains = response.data
           });
       }
-    }, 
-    mixins: [Vue2Filters.mixin]
+    }
   };
 </script>

@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
           <label>HP</label>
-          <input class='form-control' type='text' v-model="character.max_hp" placeholder="56">
+          <input class='form-control' type='text' v-model="character.hp" placeholder="56">
         </div>
         <div class="form-group">
           <label>Armor Class</label>
@@ -122,7 +122,7 @@
           <label>Alignment</label>
           <input class='form-control' type='text' v-model="character.alignment" placeholder="LG, LN, LE, NG, TN, NE, CG, CN, CE">
         </div>
-        <input type="submit" value="Create" class="btn btn-primary">
+        <input type="submit" value="Update" class="btn btn-primary">
       </form>
     </div>
   </div>
