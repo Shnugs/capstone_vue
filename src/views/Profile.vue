@@ -29,7 +29,7 @@
                     <p> {{ character["flaws"] }}</p>
                     <h3>Simulation Data:</h3>
                     <!-- TODO - Add loading box for while the page is waiting -->
-                    <highcharts :options="chartOptions"></highcharts>
+                    <highcharts :options="chartOptions" :updateArgs="updateArgs"></highcharts>
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                       <li>Wis: {{ character['wisdom'] }} (mod: {{ character['wisdom_mod'] }})</li>
                       <li>Int: {{ character['intelligence'] }} (mod: {{ character['intelligence_mod'] }})</li>
                       <li>Cha: {{ character['charisma'] }} (mod: {{ character['charisma_mod'] }})</li>
-                      <li>HP: {{ character['max_hp'] }}</li>
+                      <li>HP: {{ character['hp'] }}</li>
                       <li>AC: {{ character['armor_class'] }}</li>
                       <li>Initiative Bonus: {{ character['initiative'] }}</li>
                       <li>Speed: {{ character['speed'] }}</li>
@@ -77,22 +77,24 @@ export default {
   data: function() {
     return{
       character: {},
+      simCharts: [],
+      updateArgs: [true, true, true],
       chartOptions: {
         chart: {
           type: 'column'
         },
         title: {
-          text: character['name'] + "'s performance"
+          text: 'Opponents'
         },
         subtitle: {
-          text: 'Click the columns to view stats'
+          text: 'Click column for details'
         },
         xAxis: {
           type: 'category'
         },
         yAxis: {
           title: {
-            text: 'Win Rates by opponent'
+            text: 'Win Rate (%)'
           }
         },
         legend: {
@@ -111,63 +113,40 @@ export default {
           headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
           pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
         },
-        "series": [
-          {
-            "name": "Enemies",
-            "colorByPoint": true,
-            "data": [
-              {
-                "name": "Chrome",
-                "y": 62.74,
-                "drilldown": "Chrome"
-              },
-              {
-                "name": ENEMY_NAME,
-                "y": WIN_RATE_PERCENTAGE,
-                "drilldown": ENEMY_NAME
-              }
-            ]
-          }
-        ],
-        "drilldown": {
-          "series": [
-            {
-              "name": ENEMY_NAME
-              "id": ENEMY_NAME
-              "data": [
-                [
-                  STAT,
-                  VALUE_OF_STAT
-                ]
-              ]
-              "name": "Chrome",
-              "id": "Chrome",
-              "data": [
-                [
-                  "v65.0",
-                  0.1
-                ]
-              ]
-            },
-          ]
-        }
+        series: [{
+          name: "Opponents",
+          colorByPoint: true,
+          data: []
+        }],
+        drilldown: {}
       }
     }
   },
   created: function() {
-    axios.get("api/characters/" + this.$route.params['id'])
-      .then(response => {
-        this.character = response.data
-
+    axios.get("api/characters/" + this.$route.params.id)
+    .then(response => {
+      this.character = response.data
+      axios.get("api/simulations/get/" + this.character.id)
+      .then(sims => {
+        axios.get("api/battle_clusters/get/" + sims.data[0].character_id)
+        .then(battle_clusters => {
+          battle_clusters.data.forEach(battle_cluster => {
+            axios.get("api/characters/" + battle_cluster.opponent_id)
+            .then(villain => {
+              this.chartOptions.series[0].data.push(
+                {
+                  "name": villain.data.name,
+                  "y": parseFloat(battle_cluster.win_rate),
+                  "drilldown": villain.data.name
+                }
+              )
+              console.log(this.chartOptions)
+            });
+          });
+        });
       });
-      // axios.get("/api/sleeps/")
-      //   .then(response => {
-      //     this.sleeps = response.data; 
-      //     response.data.forEach( sleep => {
-      //       this.chartOptions.series[0].data.push(sleep.hours_in_bed);
-      //     });
-      //   });
+    });
   },
-  methods: {},
+  methods: {}
 };
 </script>
