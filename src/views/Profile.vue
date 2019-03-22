@@ -29,7 +29,7 @@
                     <p> {{ character["flaws"] }}</p>
                     <h3>Simulation Data:</h3>
                     <!-- TODO - Add loading box for while the page is waiting -->
-                    <highcharts :options="chartOptions" :updateArgs="updateArgs"></highcharts>
+                    <highcharts :options="chartOptions" ></highcharts>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default {
             borderWidth: 0,
             dataLabels: {
               enabled: true,
-              format: '{point.y:.1f}%'
+              format: '{point.y:.2f}%'
             }
           }
         },
@@ -118,7 +118,9 @@ export default {
           colorByPoint: true,
           data: []
         }],
-        drilldown: {}
+        drilldown: {
+          series: []
+        }
       }
     }
   },
@@ -140,7 +142,50 @@ export default {
                   "drilldown": villain.data.name
                 }
               )
-              console.log(this.chartOptions)
+              this.chartOptions.drilldown.series.push(
+                {
+                  "name": villain.data.name,
+                  "id": villain.data.name,
+                  "data": [
+                    [
+                      "Win Rate",
+                      parseFloat(battle_cluster.win_rate)
+                    ],
+                    [
+                      "Average Turns",
+                      parseFloat(battle_cluster.avg_turns)
+                    ],
+                    [
+                      "Initiative Win Rate",
+                      parseFloat(battle_cluster.initiative_rate)
+                    ],
+                    [
+                      "Hit Rate",
+                      parseFloat(battle_cluster.hit_rate)
+                    ],
+                    [
+                      "Crit Rate",
+                      parseFloat(battle_cluster.crit_rate)
+                    ],
+                    [
+                      "Average Damage Dealt",
+                      parseFloat(battle_cluster.avg_dmg_dealt)
+                    ],
+                    [
+                      "Average Damage Taken",
+                      parseFloat(battle_cluster.avg_dmg_taken)
+                    ],
+                    [
+                      "Average Damage Dealt Per turn",
+                      parseFloat(battle_cluster.avg_dmg_dealt_per_turn)
+                    ],
+                    [
+                      "Average Damage Taken Per Round",
+                      parseFloat(battle_cluster.avg_dmg_taken_per_turn)
+                    ]
+                  ]
+                }
+              )
             });
           });
         });
