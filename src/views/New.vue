@@ -4,7 +4,7 @@
       <li v-for="error in errors"{{ error }}</li>
     </ul>
     <div class='container'>
-      <h2>Edit Character</h2>
+      <h2>Create New Character</h2>
       <form v-on:submit.prevent="submit()">
         <div class="form-group">
           <label>Name</label>
@@ -122,7 +122,7 @@
           <label>Alignment</label>
           <input class='form-control' type='text' v-model="character.alignment" placeholder="LG, LN, LE, NG, TN, NE, CG, CN, CE">
         </div>
-        <input type="submit" value="Update" class="btn btn-primary">
+        <input type="submit" value="Create" class="btn btn-primary">
       </form>
     </div>
   </div>

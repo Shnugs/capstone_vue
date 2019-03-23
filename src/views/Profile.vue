@@ -18,18 +18,22 @@
                   <div class="about-inner">
                     <img class="img-responsive" src="images/image_about.jpg" alt="About">
                     <h3>Fluff:</h3>
-                    <p>Owner: {{ character["player"] }}</p>
-                    <p>Class: {{ character["character_class"] }}</p>
-                    <p>Race: {{ character["race"] }}</p>
-                    <p>Deity: {{ character["deity"] }}</p>
-                    <p>Level: {{ character["level"] }}</p>
-                    <p>Feats:</p>
-                    <p> {{ character["feats"] }}</p>
-                    <p>Flaws:</p>
-                    <p> {{ character["flaws"] }}</p>
+                    <ul>
+                      <li>Owner: {{ character["player"] }}</li>
+                      <li>Class: {{ character["character_class"] }}</li>
+                      <li>Race: {{ character["race"] }}</li>
+                      <li>Deity: {{ character["deity"] }}</li>
+                      <li>Level: {{ character["level"] }}</li>
+                      <li>Feats:</li>
+                      <li>{{ character["feats"] }}</li>
+                      <li>Flaws:</li>
+                      <li>{{ character["flaws"] }}</li>
+                    </ul>
+                  <hr></hr>
                     <h3>Simulation Data:</h3>
+                    <highcharts :options="chartOptions"></highcharts>
                     <!-- TODO - Add loading box for while the page is waiting -->
-                    <highcharts :options="chartOptions" ></highcharts>
+                    <!-- TODO - Adjust code to display all simulations rather than just the first -->
                   </div>
                 </div>
               </div>
@@ -38,7 +42,7 @@
               <aside class="sidebar">
                 <div class="row">
                   <div class="col-md-12 side">
-                    <h3>Stat Block</h3>
+                    <h1>Stats</h1>
                     <ul>
                       <li><h3>Attributes:</h3></li>
                       <li>Str: {{ character['strength'] }} (mod: {{ character['strength_mod'] }})</li>
@@ -55,11 +59,10 @@
                     </ul>
                   </div>
                   <div class="col-md-12 side">
-                    <h3>Paragraph</h3>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+
                   </div>
                 </div>
-                <p><router-link :to="'/edit/' + character['id']" class="btn btn-primary btn-outline with-arrow">Edit Character<i class="icon-arrow-up"></i></router-link></p>
+                <p><router-link :to="'/edit/' + character.id" class="btn btn-primary btn-outline with-arrow">Edit Character<i class="icon-arrow-up"></i></router-link></p>
               </aside>
             </div>
           </div>
@@ -69,9 +72,17 @@
   </div>
 </template>
 
+<style>
+  /*hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}*/
+</style>
+
 <script>
 var axios = require('axios')
-import {Chart} from 'highcharts-vue'
 
 export default {
   data: function() {
@@ -94,7 +105,7 @@ export default {
         },
         yAxis: {
           title: {
-            text: 'Win Rate (%)'
+            text: ''
           }
         },
         legend: {
@@ -104,8 +115,8 @@ export default {
           series: {
             borderWidth: 0,
             dataLabels: {
-              enabled: true,
-              format: '{point.y:.2f}%'
+              enabled: true
+              // format: '{point.y:.2f}%'
             }
           }
         },
@@ -148,7 +159,7 @@ export default {
                   "id": villain.data.name,
                   "data": [
                     [
-                      "Win Rate",
+                      "Win Rate (%)",
                       parseFloat(battle_cluster.win_rate)
                     ],
                     [
@@ -156,15 +167,15 @@ export default {
                       parseFloat(battle_cluster.avg_turns)
                     ],
                     [
-                      "Initiative Win Rate",
+                      "Initiative Win Rate (%)",
                       parseFloat(battle_cluster.initiative_rate)
                     ],
                     [
-                      "Hit Rate",
+                      "Hit Rate (%)",
                       parseFloat(battle_cluster.hit_rate)
                     ],
                     [
-                      "Crit Rate",
+                      "Crit Rate (%)",
                       parseFloat(battle_cluster.crit_rate)
                     ],
                     [

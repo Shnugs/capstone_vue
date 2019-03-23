@@ -19,12 +19,23 @@
             <div class="col-md-8 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    Enemy: <input v-on:keyup="runFilter()" v-model="nameFilter" list="names">
-                    <datalist id="names">
-                      <option v-for="villain in villains">{{ villain.name }}</option>
-                    </datalist>
-                  </div>
+                  <form v-on:submit.prevent="runSim()">
+                    <div class="form-group">
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <label>Enemy</label>
+                      <input class="form-control" type="text" v-on:keyup="runFilter()" v-model="nameFilter" list="names" placeholder="Goblin">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon">Add</button>
+                      </div>
+                      <datalist id="names">
+                        <option v-for="villain in villains">{{ villain.name }}</option>
+                      </datalist>
+                    </div>
+
+                  </form>
+                  <button v-on:click="runSim()" class="btn btn-primary btn-outline with-arrow">Run Simulation<i class="icon-arrow-right"></i></button>
                 </div>
               </div>
             </div>
@@ -38,7 +49,6 @@
 
 <script>
   var axios = require('axios')
-  import Vue2Filters from "vue2-filters";
 
   export default {
     data: function() {
@@ -62,6 +72,9 @@
           .then(response => {
             this.villains = response.data
           });
+      },
+      runSim: function(){
+
       }
     }
   };

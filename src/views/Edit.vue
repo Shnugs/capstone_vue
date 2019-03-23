@@ -4,7 +4,7 @@
       <li v-for="error in errors"{{ error }}</li>
     </ul>
     <div class='container'>
-      <h2>New Character</h2>
+      <h2>Edit Character</h2>
       <form v-on:submit.prevent="submit()">
         <div class="form-group">
           <label>Name</label>

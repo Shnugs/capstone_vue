@@ -13,9 +13,9 @@
         <div v-for="character in characters">
           <div class="col-md-4 text-center">
             <div class="blog-inner">
-              <a :href="/profile/ + character['id']"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></a>
+              <router-link :to="/profile/ + character['id']"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
               <div class="desc">
-                <h3><a :href="/profile/ + character['id']">{{ character["name"] }}</a></h3>
+                <h3><router-link :to="'/profile/' + character['id']">{{ character["name"] }}</router-link></h3>
                 <p><router-link :to="'/new_sim/' + character['id']" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-up"></i></router-link></p>
               </div>
             </div>
@@ -24,9 +24,9 @@
         <div class="col-md-4 text-center">
           <div class="blog-inner">
             <!-- TODO - Center this image -->
-            <a href="new"><img class="img-responsive" src="images/add_icon.png" alt="Blog"></a>
+            <a href="/new"><img class="img-responsive" src="images/add_icon.png" alt="Blog"></a>
             <div class="desc">
-              <h3><a href="new">Add New</a></h3>
+              <h3><a href="/new">Add New</a></h3>
             </div>
           </div>
         </div>
