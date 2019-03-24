@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
           <label>hp</label>
-          <input class='form-control' type='text' v-model="character.max_hp" placeholder="56">
+          <input class='form-control' type='text' v-model="character.hp" placeholder="56">
         </div>
         <div class="form-group">
           <label>Armor Class</label>
@@ -51,11 +51,11 @@
           <input class='form-control' type='text' v-model="character.constitution" placeholder="20">
         </div>
         <div class="form-group">
-          <label>intelligence</label>
+          <label>Base Intelligence</label>
           <input class='form-control' type='text' v-model="character.intelligence" placeholder="5">
         </div>
         <div class="form-group">
-          <label>wisdom</label>
+          <label>Base Wisdom</label>
           <input class='form-control' type='text' v-model="character.wisdom" placeholder="5">
         </div>
         <div class="form-group">
@@ -120,7 +120,7 @@
         </div>
         <div class="form-group">
           <label>Alignment</label>
-          <input class='form-control' type='text' v-model="character.alignment" placeholder="LG, LN, LE, NG, TN, NE, CG, CN, CE">
+          <input class='form-control' type='text' v-model="character.alignment" placeholder="[Lawful, Neutral, Chaotic] [Good, Neutral, Evil]">
         </div>
         <input type="submit" value="Create" class="btn btn-primary">
       </form>
