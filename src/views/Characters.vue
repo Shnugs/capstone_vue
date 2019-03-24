@@ -1,5 +1,4 @@
 <template>
-<!-- TODO - Set all the cards to a standard size so that they stack evenly -->
 <div class="characters">
   <div id="fh5co-page">
     <div id="fh5co-blog-section">
@@ -23,8 +22,7 @@
         </div>
         <div class="col-md-4 text-center">
           <div class="blog-inner">
-            <!-- TODO - Center this image -->
-            <a href="/new"><img class="img-responsive" src="images/add_icon.png" alt="Blog"></a>
+            <a href="/new"><img class="img-responsive" id="newChar" src="images/add_icon.png" alt="Blog"></a>
             <div class="desc">
               <h3><a href="/new">Add New</a></h3>
             </div>
@@ -39,6 +37,10 @@
 <style>
 #charCards {
   height: 500px;
+}
+#newChar {
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
 

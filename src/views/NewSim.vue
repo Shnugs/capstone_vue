@@ -13,7 +13,7 @@
           <div class="col-md-4 text-center">
             <h2>Your Fighter:</h2>
             <h3><router-link :to="'/profile/' + hero.id">{{ hero.name }}</router-link></h3>
-            <button v-on:click="runSim()" class="btn btn-primary btn-outline with-arrow">FIGHT!<i class="icon-arrow-right"></i></button>
+            <button v-on:click="fight()" class="btn btn-primary btn-outline with-arrow">FIGHT!<i class="icon-arrow-right"></i></button>
             <h1 class="versus">- VS -</h1>
             <div class="panel panel-default text-left">
               <div class="panel-heading">Selected Enemies:</div>
@@ -55,7 +55,6 @@
       </div>
     </div>
   </div>
-    <!-- <div id="map" data-animate-effect="fadeIn"></div> -->
 </template>
 
 <style>
@@ -91,9 +90,6 @@
             this.villains = response.data
           });
       },
-      runSim: function(){
-        console.log("Hello from the 'runSim' method" )
-      },
       addMonster: function(){
         if (this.villains[0] != undefined) {
           var alreadyInList = true
@@ -111,6 +107,20 @@
             this.villains = [];
           }
         }
+      },
+      fight: function(){
+        var villainIds = []
+        this.selectedVillains.forEach(villain => {
+          villainIds.push(villain.id)
+        });
+        var params = {
+          hero: this.hero.id,
+          villains: villainIds,
+          iterations: this.iterations
+        }
+        axios.post("api/characters/run_sim", params)
+        .then(this.$router.push("/profile/" + this.hero.id)
+        )
       }
     }
   };

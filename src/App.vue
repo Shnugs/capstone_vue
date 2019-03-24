@@ -81,4 +81,8 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+#fh5co-footer {
+  padding-bottom: 0px;
+  padding-top: 60px;
+}
 </style>
