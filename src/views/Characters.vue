@@ -11,12 +11,12 @@
           </div>
         </div>
         <div v-for="character in characters">
-          <div class="col-md-4 text-center">
+          <div class="col-md-4 text-center" id="charCards">
             <div class="blog-inner">
-              <router-link :to="/profile/ + character['id']"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
+              <router-link :to="'/profile/' + character.id"><img class="img-responsive" src="images/image_4.jpg" alt="Blog"></router-link>
               <div class="desc">
-                <h3><router-link :to="'/profile/' + character['id']">{{ character["name"] }}</router-link></h3>
-                <p><router-link :to="'/new_sim/' + character['id']" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-up"></i></router-link></p>
+                <h3><router-link :to="'/profile/' + character.id">{{ character["name"] }}</router-link></h3>
+                <p><router-link :to="'/new_sim/' + character.id" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-up"></i></router-link></p>
               </div>
             </div>
           </div>
@@ -37,6 +37,9 @@
 </template>
 
 <style>
+#charCards {
+  height: 500px;
+}
 </style>
 
 

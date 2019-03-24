@@ -11,29 +11,29 @@
               <p>For all your individual character needs</p>
             </div>
           </div>
+          <hr></hr>
           <div class="row">
             <div class="col-md-8">
               <div class="row">
                 <div class="col-md-12">
                   <div class="about-inner">
-                    <img class="img-responsive" src="images/image_about.jpg" alt="About">
-                    <h3>Fluff:</h3>
+                    <!-- <img class="img-responsive" src="images/image_about.jpg" alt="About"> -->
+                    <!-- TODO - Add picture url to character schema to place on main page and profile -->
+                    <h2>Fluff:</h2>
                     <ul>
                       <li>Owner: {{ character["player"] }}</li>
-                      <li>Class: {{ character["character_class"] }}</li>
                       <li>Race: {{ character["race"] }}</li>
                       <li>Deity: {{ character["deity"] }}</li>
-                      <li>Level: {{ character["level"] }}</li>
-                      <li>Feats:</li>
-                      <li>{{ character["feats"] }}</li>
-                      <li>Flaws:</li>
-                      <li>{{ character["flaws"] }}</li>
+                      <li>Feats: {{ character["feats"] }}</li>
+                      <li>Flaws: {{ character["flaws"] }}</li>
                     </ul>
                   <hr></hr>
                     <h3>Simulation Data:</h3>
-                    <highcharts :options="chartOptions"></highcharts>
+                    <div v-for="chart in simCharts">
+                      <highcharts class="chart" :updateArgs="updateArgs" :options="chart"></highcharts>
+                    </div>
                     <!-- TODO - Add loading box for while the page is waiting -->
-                    <!-- TODO - Adjust code to display all simulations rather than just the first -->
+                    <p><router-link :to="'/new_sim/' + character['id']" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-up"></i></router-link></p>
                   </div>
                 </div>
               </div>
@@ -45,6 +45,8 @@
                     <h1>Stats</h1>
                     <ul>
                       <li><h3>Attributes:</h3></li>
+                      <li>Level: {{ character["level"] }}</li>
+                      <li>Class: {{ character["character_class"] }}</li>
                       <li>Str: {{ character['strength'] }} (mod: {{ character['strength_mod'] }})</li>
                       <li>Dex: {{ character['dexterity'] }} (mod: {{ character['dexterity_mod'] }})</li>
                       <li>Con: {{ character['constitution'] }} (mod: {{ character['constitution_mod'] }})</li>
@@ -73,12 +75,6 @@
 </template>
 
 <style>
-  /*hr {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}*/
 </style>
 
 <script>
@@ -89,50 +85,7 @@ export default {
     return{
       character: {},
       simCharts: [],
-      updateArgs: [true, true, true],
-      chartOptions: {
-        chart: {
-          type: 'column'
-        },
-        title: {
-          text: 'Opponents'
-        },
-        subtitle: {
-          text: 'Click column for details'
-        },
-        xAxis: {
-          type: 'category'
-        },
-        yAxis: {
-          title: {
-            text: ''
-          }
-        },
-        legend: {
-          enabled: false
-        },
-        plotOptions: {
-          series: {
-            borderWidth: 0,
-            dataLabels: {
-              enabled: true
-              // format: '{point.y:.2f}%'
-            }
-          }
-        },
-        tooltip: {
-          headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-          pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-        },
-        series: [{
-          name: "Opponents",
-          colorByPoint: true,
-          data: []
-        }],
-        drilldown: {
-          series: []
-        }
-      }
+      updateArgs: [true, true, true]
     }
   },
   created: function() {
@@ -141,64 +94,110 @@ export default {
       this.character = response.data
       axios.get("api/simulations/get/" + this.character.id)
       .then(sims => {
-        axios.get("api/battle_clusters/get/" + sims.data[0].character_id)
-        .then(battle_clusters => {
-          battle_clusters.data.forEach(battle_cluster => {
-            axios.get("api/characters/" + battle_cluster.opponent_id)
-            .then(villain => {
-              this.chartOptions.series[0].data.push(
-                {
-                  "name": villain.data.name,
-                  "y": parseFloat(battle_cluster.win_rate),
-                  "drilldown": villain.data.name
+        sims.data.forEach(sim => {
+          var chartOptions = {
+            chart: {
+              type: 'column'
+            },
+            title: {
+              text: 'Opponents'
+            },
+            subtitle: {
+              text: 'Click column for details'
+            },
+            xAxis: {
+              type: 'category'
+            },
+            yAxis: {
+              title: {
+                text: ''
+              }
+            },
+            legend: {
+              enabled: false
+            },
+            plotOptions: {
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  format: '{point.y:.2f}'
                 }
-              )
-              this.chartOptions.drilldown.series.push(
-                {
-                  "name": villain.data.name,
-                  "id": villain.data.name,
-                  "data": [
-                    [
-                      "Win Rate (%)",
-                      parseFloat(battle_cluster.win_rate)
-                    ],
-                    [
-                      "Average Turns",
-                      parseFloat(battle_cluster.avg_turns)
-                    ],
-                    [
-                      "Initiative Win Rate (%)",
-                      parseFloat(battle_cluster.initiative_rate)
-                    ],
-                    [
-                      "Hit Rate (%)",
-                      parseFloat(battle_cluster.hit_rate)
-                    ],
-                    [
-                      "Crit Rate (%)",
-                      parseFloat(battle_cluster.crit_rate)
-                    ],
-                    [
-                      "Average Damage Dealt",
-                      parseFloat(battle_cluster.avg_dmg_dealt)
-                    ],
-                    [
-                      "Average Damage Taken",
-                      parseFloat(battle_cluster.avg_dmg_taken)
-                    ],
-                    [
-                      "Average Damage Dealt Per turn",
-                      parseFloat(battle_cluster.avg_dmg_dealt_per_turn)
-                    ],
-                    [
-                      "Average Damage Taken Per Round",
-                      parseFloat(battle_cluster.avg_dmg_taken_per_turn)
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [{
+              name: "Opponents",
+              colorByPoint: true,
+              data: []
+            }],
+            drilldown: {
+              series: []
+            }
+          }
+          axios.get("api/battle_clusters/get/" + sim.id)
+          .then(battle_clusters => {
+            battle_clusters.data.forEach(battle_cluster => {
+              axios.get("api/characters/" + battle_cluster.opponent_id)
+              .then(villain => {
+                chartOptions.series[0].data.push(
+                  {
+                    "name": villain.data.name,
+                    "y": parseFloat(battle_cluster.win_rate),
+                    "drilldown": villain.data.name
+                  }
+                )
+                chartOptions.drilldown.series.push(
+                  {
+                    "name": villain.data.name,
+                    "id": villain.data.name,
+                    "data": [
+                      [
+                        "Win Rate (%)",
+                        parseFloat(battle_cluster.win_rate)
+                      ],
+                      [
+                        "Average Turns",
+                        parseFloat(battle_cluster.avg_turns)
+                      ],
+                      [
+                        "Initiative Win Rate (%)",
+                        parseFloat(battle_cluster.initiative_rate)
+                      ],
+                      [
+                        "Hit Rate (%)",
+                        parseFloat(battle_cluster.hit_rate)
+                      ],
+                      [
+                        "Crit Rate (%)",
+                        parseFloat(battle_cluster.crit_rate)
+                      ],
+                      [
+                        "Average Damage Dealt",
+                        parseFloat(battle_cluster.avg_dmg_dealt)
+                      ],
+                      [
+                        "Average Damage Taken",
+                        parseFloat(battle_cluster.avg_dmg_taken)
+                      ],
+                      [
+                        "Average Damage Dealt Per turn",
+                        parseFloat(battle_cluster.avg_dmg_dealt_per_turn)
+                      ],
+                      [
+                        "Average Damage Taken Per Round",
+                        parseFloat(battle_cluster.avg_dmg_taken_per_turn)
+                      ]
                     ]
-                  ]
-                }
-              )
+                  }
+                )
+              });
             });
           });
+          this.simCharts.push(chartOptions)
         });
       });
     });

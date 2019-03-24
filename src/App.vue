@@ -13,7 +13,7 @@
                 <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Account
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu">
                   <router-link class="dropdown-item" to="/login">Login</router-link>
                   <div class="dropdown-divider"></div>
                   <router-link class="dropdown-item" to="/signup">Sign up</router-link>
@@ -74,4 +74,11 @@
 </template>
 
 <style>
+body {
+  background-image: url("/images/light_sketch.png");
+}
+#fh5co-header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 </style>
