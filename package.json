@@ -10,6 +10,7 @@
     "axios": "^0.18.0",
     "highcharts": "^7.0.3",
     "highcharts-vue": "^1.2.0",
+    "vee-validate": "^2.2.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vue2-filters": "^0.5.1"

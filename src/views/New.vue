@@ -1,11 +1,8 @@
 <template>
   <div class="new">
-    <ul>
-      <li v-for="error in errors"{{ error }}</li>
-    </ul>
     <div class='container'>
       <h2>Create New Character</h2>
-      <form class="needs-validation" v-on:submit.prevent="submit()">
+      <form v-on:submit.prevent="submit()">
         <div class="form-group">
           <label>Name</label>
           <input class='form-control' type='text' v-model="character.name" placeholder="Character Name">
@@ -174,8 +171,7 @@ export default {
               weapon_1_dmg: "",
               background: "",
               alignment: ""
-              },
-      errors: []
+              }
     };
   },
   created: function() {},

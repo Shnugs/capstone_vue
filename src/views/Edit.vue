@@ -1,14 +1,12 @@
 <template>
   <div class="edit">
-    <ul>
-      <li v-for="error in errors"{{ error }}</li>
-    </ul>
     <div class='container'>
       <h2>Edit Character</h2>
-      <form class="needs-validation" v-on:submit.prevent="submit()" novalidate>
+      <form v-on:submit.prevent="submit()" novalidate>
         <div class="form-group">
           <label>Name</label>
-          <input class='form-control' type='text' v-model="character.name" placeholder="Character Name">
+          <input v-validate="'required'" name="name" class='form-control' type='text' v-model="character.name" placeholder="Character Name">
+          <span>{{ errors.first('name') }}</span>
         </div>
         <div class="form-group">
           <label>Player</label>
@@ -176,8 +174,7 @@ export default {
               weapon_1_dmg: "",
               background: "",
               alignment: ""
-              },
-      errors: []
+              }
     };
   },
   created: function() {

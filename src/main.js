@@ -8,11 +8,15 @@ import loadData from 'highcharts/modules/data';
 import loadDrilldown from 'highcharts/modules/drilldown.js';
 import loadExporting from 'highcharts/modules/data';
 import HighchartsVue from 'highcharts-vue';
+import VeeValidate from 'vee-validate';
+
 
 loadData(Highcharts);
 loadDrilldown(Highcharts);
 loadExporting(Highcharts);
 Vue.use(HighchartsVue);
+
+Vue.use(VeeValidate);
 
 axios.defaults.baseURL = 
   process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
