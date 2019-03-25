@@ -15,7 +15,7 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    { path: '/characters', name: 'characters', component: Characters},
+    { path: '/', name: 'characters', component: Characters},
     { path: '/new', name: 'new', component: New },
     { path: '/login', name: 'login', component: Login },
     { path: '/logout', name: 'logout', component: Logout },

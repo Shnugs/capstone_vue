@@ -1,11 +1,11 @@
 <template>
-  <div class="new">
+  <div class="edit">
     <ul>
       <li v-for="error in errors"{{ error }}</li>
     </ul>
     <div class='container'>
       <h2>Edit Character</h2>
-      <form v-on:submit.prevent="submit()">
+      <form class="needs-validation" v-on:submit.prevent="submit()" novalidate>
         <div class="form-group">
           <label>Name</label>
           <input class='form-control' type='text' v-model="character.name" placeholder="Character Name">
@@ -123,9 +123,11 @@
           <input class='form-control' type='text' v-model="character.alignment" placeholder="[Lawful, Neutral, Chaotic] [Good, Neutral, Evil]">
         </div>
         <input type="submit" value="Update" class="btn btn-primary">
+        <input v-on:click="kill()" type="submit" value="Delete" class="btn btn-danger">
       </form>
     </div>
   </div>
+
 </template>
 
 
@@ -225,6 +227,10 @@ export default {
           this.errors = error.response.data.errors;
         });
         // TODO - Once it exists, have this route to the new characters page
+    },
+    kill: function() {
+      axios.delete("/api/characters/" + this.character.id)
+      .then(this.$router.push("/"))
     }
   }
 }

@@ -3,10 +3,10 @@
     <header id="fh5co-header" role="banner">
       <div class="container">
         <div class="header-inner">
-          <h1><i class="sl-icon-energy"></i><a href="/characters">MVG: Arena</a></h1>
+          <h1><i class="sl-icon-energy"></i><a href="/">MVG: Arena</a></h1>
           <nav role="navigation">
             <ul>
-              <li><router-link to="/characters">Home</router-link></li>
+              <li><router-link to="/">Home</router-link></li>
               <li><router-link to="/new">New Character</router-link></li>
 
               <li class="nav-item dropdown">
