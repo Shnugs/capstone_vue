@@ -28,12 +28,12 @@
                       <li>Flaws: {{ character["flaws"] }}</li>
                     </ul>
                   <hr></hr>
+                    <!-- TODO - Add loading box for while the page is waiting -->
+                    <p><router-link :to="'/new_sim/' + character['id']" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-down"></i></router-link></p>
                     <h3>Simulation Data:</h3>
                     <div v-for="chart in simCharts">
                       <highcharts class="chart" :updateArgs="updateArgs" :options="chart"></highcharts>
                     </div>
-                    <!-- TODO - Add loading box for while the page is waiting -->
-                    <p><router-link :to="'/new_sim/' + character['id']" class="btn btn-primary btn-outline with-arrow">New Sim<i class="icon-arrow-up"></i></router-link></p>
                   </div>
                 </div>
               </div>

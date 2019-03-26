@@ -3,7 +3,7 @@
     <header id="fh5co-header" role="banner">
       <div class="container">
         <div class="header-inner">
-          <h1><i class="sl-icon-energy"></i><a href="/">MVG: Arena</a></h1>
+          <h1 class="nav-header"><i class="sl-icon-energy"></i><router-link to="/">MVG: Arena</router-link></h1>
           <nav role="navigation">
             <ul>
               <li><router-link to="/">Home</router-link></li>
@@ -84,5 +84,8 @@ body {
 #fh5co-footer {
   padding-bottom: 0px;
   padding-top: 60px;
+}
+.nav-header {
+  margin-top: 10px;
 }
 </style>

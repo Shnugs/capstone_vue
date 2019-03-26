@@ -2,9 +2,9 @@
   <div class="signup">
     <div class="container">
       <div class="col-md-6 col-md-offset-3 text-center">
-        <div id="signupPanel" class="panel panel-body">
+        <div id="signupPanel" class="panel panel-body shadow rounded">
           <form v-on:submit.prevent="submit()">
-            <h1 id="signupHeadline">Signup</h1>
+            <h1 id="signupHeadline">- Signup -</h1>
             <div class="form-group">
               <label>Name:</label> 
               <input v-validate="'required'" name="name" type="text" class="form-control" v-model="name">
