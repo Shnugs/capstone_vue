@@ -5,6 +5,7 @@
         <div id="loginPanel" class="panel panel-body shadow rounded">
           <form v-on:submit.prevent="submit()">
             <h1>- Login -</h1>
+            <p v-if="problem" class="text-danger">{{ problem }}</p>
             <div class="form-group">
               <label>Email:</label>
               <input name="email" type="email" class="form-control" v-model="email">
@@ -34,7 +35,8 @@ export default {
   data: function() {
     return {
       email: "",
-      password: ""
+      password: "",
+      problem: ""
     };
   },
   computed: {
@@ -55,10 +57,8 @@ export default {
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           this.$router.push("/");
-        })
-        .catch(error => {
-          this.errors = ["Invalid email or password."];
-          this.email = "";
+        }).catch(error => {
+          this.problem = "Invalid email or password.";
           this.password = "";
         });
     }
