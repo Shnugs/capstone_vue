@@ -2,7 +2,7 @@
   <div class="new">
     <div class='container'>
       <h2 class="text-center">- Create New Character -</h2>
-      <form v-on:submit.prevent="submit()">
+      <form autocomplete="off" v-on:submit.prevent="submit()">
         <div class="panel-group">
           <div class="panel panel-primary">
             <div class="panel-heading text-center">*Required*</div>

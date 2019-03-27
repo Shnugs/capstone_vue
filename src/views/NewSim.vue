@@ -8,92 +8,92 @@
             <h3>Select your opponents and how many times to fight each</h3>
           </div>
         </div>
-        <div class="panel-group row">
-          <div class="col-md-4">
-            <div class="text-center panel panel-primary">
-              <h2 class="panel-heading">Your Fighter:</h2>
-              <div class="panel-body">
-                <router-link v-if="hero.profile_url" :to="'/profile/' + hero.id"><img class="img-responsive" :src="hero.profile_url"></router-link>
-                <h3 id="fighter-title"><router-link :to="'/profile/' + hero.id">{{ hero.name }}</router-link></h3>
-                <!-- TODO - Add character portrait here -->
-                <button :disabled="!isComplete" v-on:click="fight()" class="btn btn-primary btn-outline with-arrow">FIGHT!<i class="icon-arrow-right"></i></button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div v-if="selectedVillains.length > 0" class="text-center panel panel-success">
-              <h2 class="panel-heading">Enemies:</h2>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <label>Enemy Select</label>
-                    <input class="form-control" type="text" v-on:keyup="runFilter()" v-model="nameFilter" list="names" placeholder="Goblin">
-                    <datalist id="names">
-                      <option v-for="villain in villains">{{ villain.name }}</option>
-                    </datalist>
-                  </div>
-                  <button v-on:click.prevent="addMonster()" class="btn btn-primary btn-outline with-arrow addMonsterBtn">Add Enemy<i class="icon-arrow-down"></i></button>
-                </form>
-                <div class="panel panel-default text-left">
-                  <div class="panel-heading">Selected Enemies:</div>
-                  <ul>
-                    <li v-for="villain in selectedVillains">{{ villain.name }}</li>
-                  </ul>
+        <form autocomplete="off" v-on:submit.prevent="fight()">
+          <div class="panel-group row">
+            <div class="col-md-4">
+              <div class="text-center panel panel-primary">
+                <h2 class="panel-heading">Your Fighter:</h2>
+                <div class="panel-body">
+                  <router-link v-if="hero.profile_url" :to="'/profile/' + hero.id"><img class="img-responsive" :src="hero.profile_url"></router-link>
+                  <h3 id="fighter-title"><router-link :to="'/profile/' + hero.id">{{ hero.name }}</router-link></h3>
+                  <button type="submit" :disabled="!isComplete" v-on:click.preventf="fight()" class="btn btn-primary btn-outline with-arrow">FIGHT!<i class="icon-arrow-right"></i></button>
                 </div>
               </div>
             </div>
-            <div v-else class="text-center panel panel-danger">
-              <h2 class="panel-heading">Enemies:</h2>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <label>Enemy Select</label>
-                    <input class="form-control" type="text" v-on:keyup="runFilter()" v-model="nameFilter" list="names" placeholder="Goblin">
-                    <datalist id="names">
-                      <option v-for="villain in villains">{{ villain.name }}</option>
-                    </datalist>
+
+            <div class="col-md-4">
+              <div v-if="selectedVillains.length > 0" class="text-center panel panel-success">
+                <h2 class="panel-heading">Enemies:</h2>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <label>Enemy Select</label>
+                      <input class="form-control" type="text" v-on:keyup="runFilter()" v-model="nameFilter" list="names" placeholder="Goblin">
+                      <datalist id="names">
+                        <option v-for="villain in villains">{{ villain.name }}</option>
+                      </datalist>
+                    </div>
+                    <button v-on:click.prevent="addMonster()" class="btn btn-primary btn-outline with-arrow addMonsterBtn">Add Enemy<i class="icon-arrow-down"></i></button>
+                  </form>
+                  <div class="panel panel-default text-left">
+                    <div class="panel-heading">Selected Enemies:</div>
+                    <ul>
+                      <li v-for="villain in selectedVillains">{{ villain.name }}</li>
+                    </ul>
                   </div>
-                  <button v-on:click.prevent="addMonster()" class="btn btn-primary btn-outline with-arrow addMonsterBtn">Add Enemy<i class="icon-arrow-down"></i></button>
-                </form>
-                <div class="panel panel-default text-left">
-                  <div class="panel-heading">Selected Enemies:</div>
-                  <ul>
-                    <li v-for="villain in selectedVillains">{{ villain.name }}</li>
-                  </ul>
+                </div>
+              </div>
+              <div v-else class="text-center panel panel-danger">
+                <h2 class="panel-heading">Enemies:</h2>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <label>Enemy Select</label>
+                      <input class="form-control" type="text" v-on:keyup="runFilter()" v-model="nameFilter" list="names" placeholder="Goblin">
+                      <datalist id="names">
+                        <option v-for="villain in villains">{{ villain.name }}</option>
+                      </datalist>
+                    </div>
+                    <button v-on:click.prevent="addMonster()" class="btn btn-primary btn-outline with-arrow addMonsterBtn">Add Enemy<i class="icon-arrow-down"></i></button>
+                  </form>
+                  <div class="panel panel-default text-left">
+                    <div class="panel-heading">Selected Enemies:</div>
+                    <ul>
+                      <li v-for="villain in selectedVillains">{{ villain.name }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div v-if="iterations && selectedVillains" class="text-center panel panel-success">
+                <h2 class="panel-heading">Iterations:</h2>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <label>Simulations Per Enemy</label>
+                      <input v-validate="'required'" class="form-control text-center" type="number" v-model="iterations" placeholder="> 1">
+                      <label>Estimated Simulation Time</label>
+                      <h3>{{ timeEstimate() }}</h3>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div v-else class="text-center panel panel-danger">
+                <h2 class="panel-heading">Iterations:</h2>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <label>Simulations Per Enemy</label>
+                      <input v-validate="'required'" class="form-control text-center" type="number" v-model="iterations" placeholder="> 1">
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="col-md-4">
-            <div v-if="iterations && selectedVillains" class="text-center panel panel-success">
-              <h2 class="panel-heading">Iterations:</h2>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <label>Simulations Per Enemy</label>
-                    <input v-validate="'required'" class="form-control text-center" type="number" v-model="iterations" placeholder="> 1">
-                    <label>Estimated Simulation Time</label>
-                    <h3>{{ timeEstimate() }}</h3>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div v-else class="text-center panel panel-danger">
-              <h2 class="panel-heading">Iterations:</h2>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <label>Simulations Per Enemy</label>
-                    <input v-validate="'required'" class="form-control text-center" type="number" v-model="iterations" placeholder="> 1">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        </form>
       </div>
     </div>
   </div>
