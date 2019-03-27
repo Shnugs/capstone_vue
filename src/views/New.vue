@@ -226,6 +226,22 @@ export default {
   computed: {
     isComplete() {
       return (
+        this.character.name &&
+        this.character.player &&
+        this.character.strength &&
+        this.character.dexterity &&
+        this.character.constitution &&
+        this.character.intelligence &&
+        this.character.wisdom &&
+        this.character.charisma &&
+        this.character.hp &&
+        this.character.armor_class &&
+        this.character.level &&
+        this.character.speed &&
+        this.character.alignment &&
+        this.character.weapon_1_name &&
+        this.character.weapon_1_attack &&
+        this.character.weapon_1_dmg &&
         !this.errors.items.length > 0
       )
     },
