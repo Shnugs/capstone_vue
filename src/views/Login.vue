@@ -39,6 +39,9 @@ export default {
       problem: ""
     };
   },
+  created: function(){
+    window.scrollTo(0, 0);
+  },
   computed: {
     isComplete () {
       return this.email && this.password;

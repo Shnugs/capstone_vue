@@ -220,6 +220,9 @@ export default {
       }
     };
   },
+  created: function(){
+    window.scrollTo(0, 0);
+  },
   computed: {
     isComplete() {
       return (
@@ -238,8 +241,8 @@ export default {
         this.character.alignment &&
         this.character.weapon_1_name &&
         this.character.weapon_1_attack &&
-        this.character.weapon_1_dmg &&
-        this.character.initiative
+        this.character.weapon_1_dmg 
+        // this.character.initiative
       )
     },
     strengthMod() {

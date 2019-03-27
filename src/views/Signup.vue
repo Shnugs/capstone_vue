@@ -63,6 +63,9 @@ export default {
       passwordConfirmation: ""
     };
   },
+  created: function(){
+    window.scrollTo(0, 0);
+  },
   computed: {
     isComplete () {
       return this.name && this.email && this.password && this.passwordConfirmation;

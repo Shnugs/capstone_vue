@@ -123,6 +123,7 @@
       };
     },
     created: function(){
+      window.scrollTo(200, 180);
       axios.get("api/characters/" + this.$route.params['id'])
         .then(response => {
           this.hero = response.data

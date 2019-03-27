@@ -22,7 +22,7 @@
       </div>
       <div class="col-md-4 text-center">
         <div class="blog-inner">
-          <a href="/new"><img class="img-responsive" id="newChar" src="images/add_icon.png" alt="Blog"></a>
+          <router-link to="/new"><img class="img-responsive" id="newChar" src="images/add_icon.png" alt="Blog"></router-link>
           <div class="desc">
             <h3><a href="/new">Add New</a></h3>
           </div>
@@ -57,6 +57,7 @@ export default {
     };
   },
   created: function() {
+    window.scrollTo(0, 0);
     axios.get('/api/characters/user_characters')
     .then(response => {
       this.characters = response.data;

@@ -97,6 +97,7 @@ export default {
     }
   },
   created: function() {
+    window.scrollTo(0, 0);
     axios.get("api/characters/" + this.$route.params.id)
     .then(response => {
       this.character = response.data
