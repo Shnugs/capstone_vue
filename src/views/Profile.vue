@@ -9,7 +9,6 @@
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
               <h2>{{ character["name"] }}</h2>
               <img :src=character.profile_url :alt=character.name>
-              <p>For all your individual character needs</p>
             </div>
           </div>
           <hr></hr>

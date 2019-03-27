@@ -11,12 +11,12 @@
                 <div class="col-md-6">
                   <label v-if="errors.collect('name').length" class="text-danger">*Name*</label>
                   <label v-else>Name</label>
-                  <input v-validate="'required'" class='form-control text-danger' name="name" type='text' v-model="character.name" placeholder="Character Name">
+                  <input v-validate="'required|max:40|alpha_spaces'" class='form-control text-danger' name="name" type='text' v-model="character.name" placeholder="Character Name">
                 </div>
                 <div class="col-md-6">
                   <label v-if="errors.collect('player').length" class="text-danger">*Player*</label>
                   <label v-else>Player</label>
-                  <input v-validate="'required'" class='form-control' name="player" type='text' v-model="character.player" placeholder="Your name">
+                  <input v-validate="'required|max:40|alpha_spaces'" class='form-control' name="player" type='text' v-model="character.player" placeholder="Your name">
                 </div>
               </div>
               <div class="row">
@@ -24,42 +24,42 @@
                   <div class="col-md-1 text-center">
                     <label v-if="errors.collect('strength').length" class="text-danger">STR*</label>
                     <label v-else>STR</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control text-center' name="strength" type='string' v-model="character.strength" placeholder="15">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control text-center' name="strength" type='string' v-model="character.strength" placeholder="15">
                     <label>Mod</label>
                     <input v-validate="'required'" class='form-control text-center' name="strength_mod" type='string' v-model="strengthMod" disabled placeholder="+2">
                   </div>
                   <div class="col-md-1 text-center">
                     <label v-if="errors.collect('dexterity').length" class="text-danger">DEX*</label>
                     <label v-else>DEX</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control text-center' name="dexterity" type='string' v-model="character.dexterity" placeholder="15">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control text-center' name="dexterity" type='string' v-model="character.dexterity" placeholder="15">
                     <label>Mod</label>
                     <input v-validate="'required'" class='form-control text-center' name="dexterity_mod" type='string' v-model="dexterityMod" disabled placeholder="+2">
                   </div>
                   <div class="col-md-1 text-center">
                     <label v-if="errors.collect('constitution').length" class="text-danger">CON*</label>
                     <label v-else>CON</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control text-center' name="constitution" type='string' v-model="character.constitution" placeholder="15">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control text-center' name="constitution" type='string' v-model="character.constitution" placeholder="15">
                     <label>Mod</label>
                     <input v-validate="'required'" class='form-control text-center' name="constitution_mod" type='string' v-model="constitutionMod" disabled placeholder="+2">
                   </div>
                   <div class="col-md-1 text-center">
                     <label v-if="errors.collect('intelligence').length" class="text-danger">INT*</label>
                     <label v-else>INT</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control text-center' name="intelligence" type='string' v-model="character.intelligence" placeholder="15">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control text-center' name="intelligence" type='string' v-model="character.intelligence" placeholder="15">
                     <label>Mod</label>
                     <input v-validate="'required'" class='form-control text-center' name="intelligence_mod" type='string' v-model="intelligenceMod" disabled placeholder="+2">
                   </div>
                   <div class="col-md-1 text-center">
                     <label v-if="errors.collect('wisdom').length" class="text-danger">WIS*</label>
                     <label v-else>WIS</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control text-center' name="wisdom" type='string' v-model="character.wisdom" placeholder="15">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control text-center' name="wisdom" type='string' v-model="character.wisdom" placeholder="15">
                     <label>Mod</label>
                     <input v-validate="'required'" class='form-control text-center' name="wisdom_mod" type='string' v-model="wisdomMod" disabled placeholder="+2">
                   </div>
                   <div class="col-md-1 text-center">
                     <label v-if="errors.collect('charisma').length" class="text-danger">CHA*</label>
                     <label v-else>CHA</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control text-center' name="charisma" type='string' v-model="character.charisma" placeholder="15">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control text-center' name="charisma" type='string' v-model="character.charisma" placeholder="15">
                     <label>Mod</label>
                     <input v-validate="'required'" class='form-control text-center' name="charisma_mod" type='string' v-model="charismaMod" disabled placeholder="+2">
                   </div>
@@ -68,17 +68,17 @@
                   <div class="col-md-2">
                     <label v-if="errors.collect('hp').length" class="text-danger">*HP*</label>
                     <label v-else>HP</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control' name="hp" type='text' v-model="character.hp" placeholder="56">
+                    <input v-validate="'required|max:4|numeric|max_value:9000'" v-on:keypress="isNumber(event)" class='form-control' name="hp" type='text' v-model="character.hp" placeholder="56">
                   </div>
                   <div class="col-md-2">
                     <label v-if="errors.collect('armor_class').length" class="text-danger">*Armor Class*</label>
                     <label v-else>Armor Class</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control' name="armor_class" type='text' v-model="character.armor_class" placeholder="17">
+                    <input v-validate="'required|max:2|numeric|max_value:50'" v-on:keypress="isNumber(event)" class='form-control' name="armor_class" type='text' v-model="character.armor_class" placeholder="17">
                   </div>
                   <div class="col-md-2">
                     <label v-if="errors.collect('level').length" class="text-danger">*Level*</label>
                     <label v-else>Level</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control' name="level" type='text' v-model="character.level" placeholder="1-20">
+                    <input v-validate="'required|max:2|numeric|max_value:30'" v-on:keypress="isNumber(event)" class='form-control' name="level" type='text' v-model="character.level" placeholder="1-20">
                   </div>
                   <div class="col-md-2">
                     <label v-if="errors.collect('initiative').length" class="text-danger">*Initiative*</label>
@@ -88,7 +88,7 @@
                   <div class="col-md-2">
                     <label v-if="errors.collect('speed').length" class="text-danger">*Speed*</label>
                     <label v-else>Speed</label>
-                    <input v-validate="'required'" v-on:keypress="isNumber(event)" class='form-control' name="speed" type='text' v-model="character.speed" placeholder="30">
+                    <input v-validate="'required|max:3|numeric|max_value:500'" v-on:keypress="isNumber(event)" class='form-control' name="speed" type='text' v-model="character.speed" placeholder="30">
                   </div>
                   <div class="col-md-2">
                     <label v-if="errors.collect('alignment').length" class="text-danger">*Alignment*</label>
@@ -111,13 +111,13 @@
                 <div class="col-md-4">
                   <label v-if="errors.collect('weapon_1_name').length" class="text-danger">*Weapon 1 Name*</label>
                   <label v-else>Weapon 1 Name</label>
-                  <input v-validate="'required'" class='form-control' name="weapon_1_name" type='text' v-model="character.weapon_1_name" placeholder="Longsword, Bow, Dragon Slayer etc...">
+                  <input v-validate="'required|alpha_spaces|max:40'" class='form-control' name="weapon_1_name" type='text' v-model="character.weapon_1_name" placeholder="Longsword, Bow, Dragon Slayer etc...">
                   <label v-if="errors.collect('weapon_1_attack').length" class="text-danger">*Weapon 1 Attack Bonus*</label>
                   <label v-else>Weapon 1 Attack Bonus</label>
                   <input v-validate="'required'" class='form-control' name="weapon_1_attack" type='text' v-model="character.weapon_1_attack" placeholder="+5, -1, etc...">
                   <label v-if="errors.collect('weapon_1_dmg').length" class="text-danger">*Weapon 1 Damage*</label>
                   <label v-else>Weapon 1 Damage</label>
-                  <input v-validate="'required'" class='form-control' name="weapon_1_dmg" type='text' v-model="character.weapon_1_dmg" placeholder="1d6 + 3, 2D4-1">
+                  <input v-validate="{ required: true, regex: /\d+\s?[dD]\s?\d+\s?[\+\-]\s?\d+/ }" class='form-control' name="weapon_1_dmg" type='text' v-model="character.weapon_1_dmg" placeholder="1d6 + 3, 2D4-1">
                 </div>
                 <div class="col-md-4">
                   <label>Weapon 2 Name</label>
@@ -237,23 +237,7 @@ export default {
   computed: {
     isComplete() {
       return (
-        this.character.name &&
-        this.character.player &&
-        this.character.strength &&
-        this.character.dexterity &&
-        this.character.constitution &&
-        this.character.intelligence &&
-        this.character.wisdom &&
-        this.character.charisma &&
-        this.character.hp &&
-        this.character.armor_class &&
-        this.character.level &&
-        this.character.speed &&
-        this.character.alignment &&
-        this.character.weapon_1_name &&
-        this.character.weapon_1_attack &&
-        this.character.weapon_1_dmg
-        // this.character.initiative
+        !this.errors.items.length > 0
       )
     },
     strengthMod() {
