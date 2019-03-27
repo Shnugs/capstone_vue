@@ -88,4 +88,9 @@ body {
 .nav-header {
   margin-top: 10px;
 }
+img {
+  height:100%;
+  max-height:233px;
+  margin:auto;
+}
 </style>

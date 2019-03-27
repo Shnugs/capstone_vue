@@ -141,6 +141,8 @@
           <div class="panel panel-warning">
             <div class="panel-heading text-center">Not Currently Essential </div>
             <div class="panel-body">
+              <label>Profile URL</label>
+              <input class='form-control' type='text' v-model="character.profile_url" placeholder="website.com/your_characters_profile_url">
               <label>Class</label>
               <input class='form-control' type='text' v-model="character.character_class" placeholder="Fighter, Wizard, etc...">
               <label>Race</label>
@@ -213,7 +215,8 @@ export default {
         weapon_1_attack: "",
         weapon_1_dmg: "",
         background: "",
-        alignment: ""
+        alignment: "",
+        profile_url: ""
       }
     };
   },
@@ -297,7 +300,8 @@ export default {
         weapon_1_attack: this.character['weapon_1_attack'],
         weapon_1_dmg: this.character['weapon_1_dmg'],
         background: this.character['background'],
-        alignment: this.character['alignment']
+        alignment: this.character['alignment'],
+        profile_url: this.character['profile_url']
       };
       axios.post("/api/characters", params)
         .then(response => {

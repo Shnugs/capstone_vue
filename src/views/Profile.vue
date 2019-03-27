@@ -2,12 +2,13 @@
 <template>
   <!-- TODO - Clean up the formatting on this so it's not such an eyesore -->
   <div class="profile">
-    <div id="fh5co-page">
-      <div id="fh5co-about-section">
-        <div class="container">
+    <div class="container">
+      <div id="fh5co-page">
+        <div id="fh5co-about-section">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
               <h2>{{ character["name"] }}</h2>
+              <img :src=character.profile_url :alt=character.name>
               <p>For all your individual character needs</p>
             </div>
           </div>
@@ -17,8 +18,6 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="about-inner">
-                    <!-- <img class="img-responsive" src="images/image_about.jpg" alt="About"> -->
-                    <!-- TODO - Add picture url to character schema to place on main page and profile -->
                     <h2>Fluff:</h2>
                     <ul>
                       <li>Owner: {{ character["player"] }}</li>
@@ -75,6 +74,15 @@
 </template>
 
 <style>
+div#fh5co-about-section{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 50px;
+}
+#fh5co-page: {
+  padding-top: 20px;
+}
 </style>
 
 <script>
